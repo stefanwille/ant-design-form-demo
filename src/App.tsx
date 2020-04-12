@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./App.css";
-import { Card, Form, Input, Checkbox, Button, Typography } from "antd";
+import {
+  Card,
+  Form,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+  notification,
+} from "antd";
 import { Store } from "antd/lib/form/interface";
 
 const { Paragraph } = Typography;
@@ -25,11 +33,20 @@ const App = () => {
   const [currentValues, setCurrentValues] = useState<Store>({});
   const [changedValues, setChangedValues] = useState<Store>({});
   const onFinish = (values: Store) => {
-    console.log("Success:", values);
+    notification.open({
+      message: "onFinish",
+      description: <pre>{JSON.stringify(values, null, 2)}</pre>,
+      duration: 0,
+    });
   };
 
   const onFinishFailed = (errorInfo: ValidateErrorEntity) => {
-    console.log("Failed:", errorInfo);
+    notification.open({
+      message: "onFinishFailed",
+      description: <pre>{JSON.stringify(errorInfo, null, 2)}</pre>,
+      duration: 0,
+      type: "warning",
+    });
   };
 
   const onValuesChange = (changedValues: Store, currentValues: Store) => {
@@ -81,11 +98,11 @@ const App = () => {
 
       <br />
 
-      <Card title="Debugging">
-        <Paragraph>Current values: </Paragraph>
-        <Paragraph>{JSON.stringify(currentValues, null, 2)}</Paragraph>
-        <Paragraph>Changed values: </Paragraph>
+      <Card title="onValuesChange">
+        <Paragraph>changedValues: </Paragraph>
         <Paragraph>{JSON.stringify(changedValues, null, 2)}</Paragraph>
+        <Paragraph>currentValues: </Paragraph>
+        <Paragraph>{JSON.stringify(currentValues, null, 2)}</Paragraph>
       </Card>
     </div>
   );
