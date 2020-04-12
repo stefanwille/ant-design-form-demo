@@ -35,7 +35,11 @@ const App = () => {
   const onFinish = (values: Store) => {
     notification.open({
       message: "onFinish",
-      description: <pre>{JSON.stringify(values, null, 2)}</pre>,
+      description: (
+        <pre>
+          <Paragraph code>{JSON.stringify(values, null, 2)}</Paragraph>
+        </pre>
+      ),
       duration: 0,
     });
   };
@@ -43,7 +47,11 @@ const App = () => {
   const onFinishFailed = (errorInfo: ValidateErrorEntity) => {
     notification.open({
       message: "onFinishFailed",
-      description: <pre>{JSON.stringify(errorInfo, null, 2)}</pre>,
+      description: (
+        <pre>
+          <Paragraph code>{JSON.stringify(errorInfo, null, 2)}</Paragraph>
+        </pre>
+      ),
       duration: 0,
       type: "warning",
     });
@@ -100,9 +108,14 @@ const App = () => {
 
       <Card title="onValuesChange">
         <Paragraph>changedValues: </Paragraph>
-        <Paragraph>{JSON.stringify(changedValues, null, 2)}</Paragraph>
+        <pre>
+          <Paragraph code>{JSON.stringify(changedValues, null, 2)}</Paragraph>
+        </pre>
+
         <Paragraph>currentValues: </Paragraph>
-        <Paragraph>{JSON.stringify(currentValues, null, 2)}</Paragraph>
+        <pre>
+          <Paragraph code>{JSON.stringify(currentValues, null, 2)}</Paragraph>
+        </pre>
       </Card>
     </div>
   );
